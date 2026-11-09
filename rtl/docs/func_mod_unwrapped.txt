@@ -1,0 +1,271 @@
+#include <stdlib.h>
+
+#define GRID_SIZE   100
+#define TOTAL_NODES 10000
+#define VAL_WALL    298
+#define VAL_START   299
+#define VAL_END     300
+
+int distance[TOTAL_NODES];
+int parentX[TOTAL_NODES];
+int parentY[TOTAL_NODES];
+int parentValid[TOTAL_NODES];
+int visited[TOTAL_NODES];
+
+int currentX;
+int currentY;
+int startX;
+int startY;
+int endX;
+int endY;
+int solved;
+
+/* pomocne promenljive - evaluateSurroundingNodes */
+int i, j, a, d, dx, dy, h;
+
+/* pomocne promenljive - moveNode (po sekciji) */
+int s0_minDist, s0_nextX, s0_nextY, s0_found;
+int s1_minDist, s1_nextX, s1_nextY, s1_found;
+int s2_minDist, s2_nextX, s2_nextY, s2_found;
+int s3_minDist, s3_nextX, s3_nextY, s3_found;
+int x, y, dist;
+
+/* globalni pobednik */
+int globalMinDist;
+int nextX, nextY, found;
+
+/* ===================== MAIN FLOW ===================== */
+
+INIT:
+    currentX = startX;
+    currentY = startY;
+    solved = 0;
+
+LOOP:
+    if (solved) goto END;
+
+/* =================== EVALUATE =================== */
+
+EVAL_INIT:
+    i = currentX - 1;
+
+EVAL_I_LOOP:
+    if (i > currentX + 1) goto EVAL_DONE;
+
+    j = currentY - 1;
+
+EVAL_J_LOOP:
+    if (j > currentY + 1) {
+        i = i + 1;
+        goto EVAL_I_LOOP;
+    }
+
+    if (i < 0 || i >= GRID_SIZE) { j = j + 1; goto EVAL_J_LOOP; }
+    if (j < 0 || j >= GRID_SIZE) { j = j + 1; goto EVAL_J_LOOP; }
+    if (i == currentX && j == currentY) { j = j + 1; goto EVAL_J_LOOP; }
+
+    a = j * GRID_SIZE + i;
+    d = distance[a];
+
+    if (d == VAL_END) {
+        parentX[a]     = currentX;
+        parentY[a]     = currentY;
+        parentValid[a] = 1;
+        solved = 1;
+        j = j + 1;
+        goto EVAL_J_LOOP;
+    }
+
+    if (d == VAL_WALL || d == VAL_START) { j = j + 1; goto EVAL_J_LOOP; }
+
+    dx = endX - i; if (dx < 0) dx = -dx;
+    dy = endY - j; if (dy < 0) dy = -dy;
+    if (dx > dy) h = 2 * (dx - dy) + 3 * dy;
+    else         h = 2 * (dy - dx) + 3 * dx;
+    distance[a] = h;
+
+    if (!parentValid[a]) {
+        parentX[a]     = currentX;
+        parentY[a]     = currentY;
+        parentValid[a] = 1;
+    }
+
+    j = j + 1;
+    goto EVAL_J_LOOP;
+
+EVAL_DONE:
+
+/* =================== MOVE - SEKCIJA 0 (x: 0-24) =================== */
+
+MOVE_S0_INIT:
+    s0_minDist = 100000;
+    s0_nextX   = 0;
+    s0_nextY   = 0;
+    s0_found   = 0;
+    x = 0;
+
+MOVE_S0_X_LOOP:
+    if (x >= 25) goto MOVE_S0_DONE;
+    y = 0;
+
+MOVE_S0_Y_LOOP:
+    if (y >= GRID_SIZE) { x = x + 1; goto MOVE_S0_X_LOOP; }
+
+    a = y * GRID_SIZE + x;
+    if (!visited[a]) {
+        dist = distance[a];
+        if (dist > 0 && dist < VAL_WALL && dist < s0_minDist) {
+            s0_minDist = dist;
+            s0_nextX   = x;
+            s0_nextY   = y;
+            s0_found   = 1;
+        }
+    }
+
+    y = y + 1;
+    goto MOVE_S0_Y_LOOP;
+
+MOVE_S0_DONE:
+
+/* =================== MOVE - SEKCIJA 1 (x: 25-49) =================== */
+
+MOVE_S1_INIT:
+    s1_minDist = 100000;
+    s1_nextX   = 0;
+    s1_nextY   = 0;
+    s1_found   = 0;
+    x = 25;
+
+MOVE_S1_X_LOOP:
+    if (x >= 50) goto MOVE_S1_DONE;
+    y = 0;
+
+MOVE_S1_Y_LOOP:
+    if (y >= GRID_SIZE) { x = x + 1; goto MOVE_S1_X_LOOP; }
+
+    a = y * GRID_SIZE + x;
+    if (!visited[a]) {
+        dist = distance[a];
+        if (dist > 0 && dist < VAL_WALL && dist < s1_minDist) {
+            s1_minDist = dist;
+            s1_nextX   = x;
+            s1_nextY   = y;
+            s1_found   = 1;
+        }
+    }
+
+    y = y + 1;
+    goto MOVE_S1_Y_LOOP;
+
+MOVE_S1_DONE:
+
+/* =================== MOVE - SEKCIJA 2 (x: 50-74) =================== */
+
+MOVE_S2_INIT:
+    s2_minDist = 100000;
+    s2_nextX   = 0;
+    s2_nextY   = 0;
+    s2_found   = 0;
+    x = 50;
+
+MOVE_S2_X_LOOP:
+    if (x >= 75) goto MOVE_S2_DONE;
+    y = 0;
+
+MOVE_S2_Y_LOOP:
+    if (y >= GRID_SIZE) { x = x + 1; goto MOVE_S2_X_LOOP; }
+
+    a = y * GRID_SIZE + x;
+    if (!visited[a]) {
+        dist = distance[a];
+        if (dist > 0 && dist < VAL_WALL && dist < s2_minDist) {
+            s2_minDist = dist;
+            s2_nextX   = x;
+            s2_nextY   = y;
+            s2_found   = 1;
+        }
+    }
+
+    y = y + 1;
+    goto MOVE_S2_Y_LOOP;
+
+MOVE_S2_DONE:
+
+/* =================== MOVE - SEKCIJA 3 (x: 75-99) =================== */
+
+MOVE_S3_INIT:
+    s3_minDist = 100000;
+    s3_nextX   = 0;
+    s3_nextY   = 0;
+    s3_found   = 0;
+    x = 75;
+
+MOVE_S3_X_LOOP:
+    if (x >= GRID_SIZE) goto MOVE_S3_DONE;
+    y = 0;
+
+MOVE_S3_Y_LOOP:
+    if (y >= GRID_SIZE) { x = x + 1; goto MOVE_S3_X_LOOP; }
+
+    a = y * GRID_SIZE + x;
+    if (!visited[a]) {
+        dist = distance[a];
+        if (dist > 0 && dist < VAL_WALL && dist < s3_minDist) {
+            s3_minDist = dist;
+            s3_nextX   = x;
+            s3_nextY   = y;
+            s3_found   = 1;
+        }
+    }
+
+    y = y + 1;
+    goto MOVE_S3_Y_LOOP;
+
+MOVE_S3_DONE:
+
+/* =================== MOVE - COMPARE (globalni minimum) =================== */
+
+MOVE_COMPARE:
+    found        = 0;
+    globalMinDist = 100000;
+
+    if (s0_found && s0_minDist < globalMinDist) {
+        globalMinDist = s0_minDist;
+        nextX = s0_nextX;
+        nextY = s0_nextY;
+        found = 1;
+    }
+
+    if (s1_found && s1_minDist < globalMinDist) {
+        globalMinDist = s1_minDist;
+        nextX = s1_nextX;
+        nextY = s1_nextY;
+        found = 1;
+    }
+
+    if (s2_found && s2_minDist < globalMinDist) {
+        globalMinDist = s2_minDist;
+        nextX = s2_nextX;
+        nextY = s2_nextY;
+        found = 1;
+    }
+
+    if (s3_found && s3_minDist < globalMinDist) {
+        globalMinDist = s3_minDist;
+        nextX = s3_nextX;
+        nextY = s3_nextY;
+        found = 1;
+    }
+
+MOVE_CHECK:
+    if (found) {
+        visited[currentY * GRID_SIZE + currentX] = 1;
+        currentX = nextX;
+        currentY = nextY;
+    } else {
+        solved = 1;
+    }
+
+    goto LOOP;
+
+END:

@@ -1,0 +1,13 @@
+# Lista mapa za test_coverage: jedna mapa po liniji,
+# opciono "unsolvable" za mape bez putanje.
+maps/01_map.txt
+maps/02_map.txt
+maps/03_map.txt
+maps/04_map.txt
+maps/05_map.txt
+maps/06_map.txt
+maps/07_map.txt
+maps/unsolvable_08.txt unsolvable
+maps/09_map.txt
+maps/10_map.txt
+maps/11_map.txt

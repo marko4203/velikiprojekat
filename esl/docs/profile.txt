@@ -1,0 +1,258 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 75.00      0.06     0.06     1742     0.03     0.04  moveNode()
+ 12.50      0.07     0.01 16597825     0.00     0.00  Nodes::getDistance() const
+ 12.50      0.08     0.01     1366     0.01     0.01  void std::__detail::__to_chars_10_impl<unsigned int>(char*, unsigned int, unsigned int)
+  0.00      0.08     0.00    59523     0.00     0.00  Nodes::getType() const
+  0.00      0.08     0.00    12483     0.00     0.00  Nodes::getParentX() const
+  0.00      0.08     0.00    12215     0.00     0.00  Nodes::updateDistance(int, int)
+  0.00      0.08     0.00    10000     0.00     0.00  Nodes::Nodes()
+  0.00      0.08     0.00    10000     0.00     0.00  Nodes::Nodes(int, int, int, NodeType)
+  0.00      0.08     0.00     1742     0.00     0.00  evaluateSurroundingNodes(int, int)
+  0.00      0.08     0.00     1367     0.00     0.00  Nodes::setParent(int, int)
+  0.00      0.08     0.00     1366     0.00     0.00  std::__new_allocator<char>::~__new_allocator()
+  0.00      0.08     0.00     1366     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(unsigned long, char, std::allocator<char> const&)
+  0.00      0.08     0.00     1366     0.00     0.01  std::__cxx11::to_string(int)
+  0.00      0.08     0.00     1366     0.00     0.00  unsigned int std::__detail::__to_chars_len<unsigned int>(unsigned int, int)
+  0.00      0.08     0.00     1366     0.00     0.00  std::remove_reference<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&>::type&& std::move<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
+  0.00      0.08     0.00     1366     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)
+  0.00      0.08     0.00      268     0.00     0.00  Nodes::getParentY() const
+  0.00      0.08     0.00      189     0.00     0.00  Nodes::setType(NodeType)
+  0.00      0.08     0.00        2     0.00     5.01  display(Nodes (*) [100], int)
+  0.00      0.08     0.00        1     0.00     0.00  __static_initialization_and_destruction_0()
+  0.00      0.08     0.00        1     0.00     0.00  finalPath()
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2024 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 4 byte(s) for 12.50% of 0.08 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]    100.0    0.00    0.08                 main [1]
+                0.06    0.01    1742/1742        moveNode() [2]
+                0.00    0.01       2/2           display(Nodes (*) [100], int) [3]
+                0.00    0.00   10000/10000       Nodes::Nodes(int, int, int, NodeType) [17]
+                0.00    0.00    1742/1742        evaluateSurroundingNodes(int, int) [18]
+                0.00    0.00     189/189         Nodes::setType(NodeType) [26]
+                0.00    0.00       1/1           finalPath() [28]
+-----------------------------------------------
+                0.06    0.01    1742/1742        main [1]
+[2]     87.5    0.06    0.01    1742         moveNode() [2]
+                0.01    0.00 16578203/16597825     Nodes::getDistance() const [4]
+-----------------------------------------------
+                0.00    0.01       2/2           main [1]
+[3]     12.5    0.00    0.01       2         display(Nodes (*) [100], int) [3]
+                0.00    0.01    1366/1366        std::__cxx11::to_string(int) [5]
+                0.00    0.00   19622/16597825     Nodes::getDistance() const [4]
+                0.00    0.00   20000/59523       Nodes::getType() const [13]
+                0.00    0.00    1366/1366        std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [24]
+-----------------------------------------------
+                0.00    0.00   19622/16597825     display(Nodes (*) [100], int) [3]
+                0.01    0.00 16578203/16597825     moveNode() [2]
+[4]     12.5    0.01    0.00 16597825         Nodes::getDistance() const [4]
+-----------------------------------------------
+                0.00    0.01    1366/1366        display(Nodes (*) [100], int) [3]
+[5]     12.5    0.00    0.01    1366         std::__cxx11::to_string(int) [5]
+                0.01    0.00    1366/1366        void std::__detail::__to_chars_10_impl<unsigned int>(char*, unsigned int, unsigned int) [6]
+                0.00    0.00    1366/1366        unsigned int std::__detail::__to_chars_len<unsigned int>(unsigned int, int) [22]
+                0.00    0.00    1366/1366        std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(unsigned long, char, std::allocator<char> const&) [21]
+                0.00    0.00    1366/1366        std::__new_allocator<char>::~__new_allocator() [20]
+-----------------------------------------------
+                0.01    0.00    1366/1366        std::__cxx11::to_string(int) [5]
+[6]     12.5    0.01    0.00    1366         void std::__detail::__to_chars_10_impl<unsigned int>(char*, unsigned int, unsigned int) [6]
+-----------------------------------------------
+                0.00    0.00     269/59523       finalPath() [28]
+                0.00    0.00   20000/59523       display(Nodes (*) [100], int) [3]
+                0.00    0.00   39254/59523       evaluateSurroundingNodes(int, int) [18]
+[13]     0.0    0.00    0.00   59523         Nodes::getType() const [13]
+-----------------------------------------------
+                0.00    0.00     268/12483       finalPath() [28]
+                0.00    0.00   12215/12483       evaluateSurroundingNodes(int, int) [18]
+[14]     0.0    0.00    0.00   12483         Nodes::getParentX() const [14]
+-----------------------------------------------
+                0.00    0.00   12215/12215       evaluateSurroundingNodes(int, int) [18]
+[15]     0.0    0.00    0.00   12215         Nodes::updateDistance(int, int) [15]
+-----------------------------------------------
+                0.00    0.00   10000/10000       __static_initialization_and_destruction_0() [27]
+[16]     0.0    0.00    0.00   10000         Nodes::Nodes() [16]
+-----------------------------------------------
+                0.00    0.00   10000/10000       main [1]
+[17]     0.0    0.00    0.00   10000         Nodes::Nodes(int, int, int, NodeType) [17]
+-----------------------------------------------
+                0.00    0.00    1742/1742        main [1]
+[18]     0.0    0.00    0.00    1742         evaluateSurroundingNodes(int, int) [18]
+                0.00    0.00   39254/59523       Nodes::getType() const [13]
+                0.00    0.00   12215/12215       Nodes::updateDistance(int, int) [15]
+                0.00    0.00   12215/12483       Nodes::getParentX() const [14]
+                0.00    0.00    1367/1367        Nodes::setParent(int, int) [19]
+-----------------------------------------------
+                0.00    0.00    1367/1367        evaluateSurroundingNodes(int, int) [18]
+[19]     0.0    0.00    0.00    1367         Nodes::setParent(int, int) [19]
+-----------------------------------------------
+                0.00    0.00    1366/1366        std::__cxx11::to_string(int) [5]
+[20]     0.0    0.00    0.00    1366         std::__new_allocator<char>::~__new_allocator() [20]
+-----------------------------------------------
+                0.00    0.00    1366/1366        std::__cxx11::to_string(int) [5]
+[21]     0.0    0.00    0.00    1366         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(unsigned long, char, std::allocator<char> const&) [21]
+-----------------------------------------------
+                0.00    0.00    1366/1366        std::__cxx11::to_string(int) [5]
+[22]     0.0    0.00    0.00    1366         unsigned int std::__detail::__to_chars_len<unsigned int>(unsigned int, int) [22]
+-----------------------------------------------
+                0.00    0.00    1366/1366        std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [24]
+[23]     0.0    0.00    0.00    1366         std::remove_reference<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&>::type&& std::move<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) [23]
+-----------------------------------------------
+                0.00    0.00    1366/1366        display(Nodes (*) [100], int) [3]
+[24]     0.0    0.00    0.00    1366         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [24]
+                0.00    0.00    1366/1366        std::remove_reference<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&>::type&& std::move<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) [23]
+-----------------------------------------------
+                0.00    0.00     268/268         finalPath() [28]
+[25]     0.0    0.00    0.00     268         Nodes::getParentY() const [25]
+-----------------------------------------------
+                0.00    0.00     189/189         main [1]
+[26]     0.0    0.00    0.00     189         Nodes::setType(NodeType) [26]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I_grid [29]
+[27]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0() [27]
+                0.00    0.00   10000/10000       Nodes::Nodes() [16]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[28]     0.0    0.00    0.00       1         finalPath() [28]
+                0.00    0.00     269/59523       Nodes::getType() const [13]
+                0.00    0.00     268/12483       Nodes::getParentX() const [14]
+                0.00    0.00     268/268         Nodes::getParentY() const [25]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2024 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [18] evaluateSurroundingNodes(int, int) [19] Nodes::setParent(int, int) [20] std::__new_allocator<char>::~__new_allocator()
+  [27] __static_initialization_and_destruction_0() [16] Nodes::Nodes() [21] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(unsigned long, char, std::allocator<char> const&)
+   [3] display(Nodes (*) [100], int) [17] Nodes::Nodes(int, int, int, NodeType) [5] std::__cxx11::to_string(int)
+   [2] moveNode()             [14] Nodes::getParentX() const [22] unsigned int std::__detail::__to_chars_len<unsigned int>(unsigned int, int)
+  [28] finalPath()            [25] Nodes::getParentY() const [6] void std::__detail::__to_chars_10_impl<unsigned int>(char*, unsigned int, unsigned int)
+  [15] Nodes::updateDistance(int, int) [4] Nodes::getDistance() const [23] std::remove_reference<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&>::type&& std::move<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
+  [26] Nodes::setType(NodeType) [13] Nodes::getType() const [24] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)

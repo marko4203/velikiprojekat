@@ -1,0 +1,13 @@
+# Generisani build izlazi (skripta ih pravi pri svakom pokretanju)
+build/
+
+# Vivado privremeni/log fajlovi
+*.jou
+*.log
+*.str
+.Xil/
+vivado*.backup.jou
+vivado*.backup.log
+
+# Vitis
+*.xsa

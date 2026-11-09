@@ -1,0 +1,13 @@
+# generisano pri svakom pokretanju simulacije
+xsim.dir/
+xsim.covdb/
+*.log
+*.jou
+*.pb
+*.wdb
+*.backup.*
+tr_db.log
+.Xil/
+
+# izlaz regresije
+regr_logs/

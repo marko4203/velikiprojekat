@@ -1,0 +1,34 @@
+/*
+ * project-spec/meta-user/recipes-bsp/device-tree/files/system-user.dtsi
+ *
+ * Prepisuje samo "compatible" polja koja je generisao DTG (pl.dtsi), po istom
+ * principu kao u Vezbi 11. PAZNJA - razlika u odnosu na Vezbu 11 (PetaLinux 2019.2):
+ * DTG u PetaLinux-u 2026.1 magistralu PL-a zove "pl-bus" (labela je i dalje amba_pl),
+ * a instance su axi_bram_controller_0 i hardware_accelerator_0. Cvor se prepisuje
+ * SAMO ako se labela, ime i unit-adresa poklope slovo za slovo sa pl.dtsi;
+ * "amba_pl: amba_pl { ... }" iz vezbe bi napravio NOVI, prazan cvor i drajver se
+ * nikad ne bi upario.
+ *
+ * Vrednosti proverene prema pl.dtsi i sysbd.hwh (Vivado 2024.1, xc7z010 = Zybo Z7-10):
+ *   hardware_accelerator_0  reg = <0x40010000 0x1000>   interrupts = <0 29 4>  (IRQ_F2P[0], level - sticky irq iz hw_fixes)
+ *   axi_bram_controller_0   reg = <0x40000000 0x10000>  (64 KB = 4 banke x 4096 reci)
+ * reg i interrupts se NE navode ovde - ostaju kako ih je DTG generisao.
+ */
+/include/ "system-conf.dtsi"
+/ {
+	amba_pl: pl-bus {
+		hardware_accelerator_0: gbfs_hardware_accelerator@40010000 {
+			compatible = "pathfinder";
+		};
+		axi_bram_controller_0: axi_bram_ctrl@40000000 {
+			compatible = "pathfinder_bram";
+		};
+	};
+};
+
+/* Ekvivalentan, kraci zapis preko labela (radi u svim verzijama PetaLinux-a,
+ * ne zavisi od imena cvora) - koristite jedan ILI drugi oblik, ne oba:
+ *
+ * &hardware_accelerator_0 { compatible = "pathfinder"; };
+ * &axi_bram_controller_0  { compatible = "pathfinder_bram"; };
+ */
